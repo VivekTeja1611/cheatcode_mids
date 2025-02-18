@@ -1,0 +1,27 @@
+CXXFLAGS := -Wall --std=c++17
+
+SRC1_CPP_FILES:= $(wildcard src/src1/*.cpp)
+SRC1_OBJ_FILES:= $(notdir $(SRC1_CPP_FILES:.cpp=.o))
+
+SRC2_CPP_FILES:= $(wildcard src/src2/*.cpp)
+SRC2_OBJ_FILES:= $(notdir $(SRC2_CPP_FILES:.cpp=.o))
+
+
+
+MAIN_CPP_FILES:=$(wildcard main/*.cpp)
+MAIN_FILES:= $(notdir $(MAIN_CPP_FILES:.cpp=))
+
+
+all: $(SRC1_OBJ_FILES) $(SRC2_OBJ_FILES) $(MAIN_FILES)
+
+$(SRC1_OBJ_FILES): %.o: src/src1/%.cpp 
+	g++ $(CXXFLAGS) -c $< -o $@ 
+
+$(SRC2_OBJ_FILES): %.o: src/src2/%.cpp 
+	g++ $(CXXFLAGS) -c $< -o $@	
+
+$(MAIN_FILES): % : main/%.cpp add.o comp.o find.o ops.o rem.o
+	g++ $(CXXFLAGS) $^ -o $@	
+clean :
+	rm -f *.o $(MAIN_FILES)
+
