@@ -1,0 +1,23 @@
+CXXFLAGS:=-Wall --std=c++11 -Werror
+OBJ_FILES1:= haha.o nohehe.o hehe.o
+HEADERS:= card.h deck.h player.h
+
+all: $(OBJ_FILES1)  exec1 powerful
+
+haha.o: haha.cpp player.h card.h
+	g++ $(CXXFLAGS) -c $< -o $@
+hehe.o: hehe.cpp card.h
+	g++ $(CXXFLAGS) -c $< -o $@
+nohehe.o: nohehe.cpp deck.h card.h
+	g++ $(CXXFLAGS) -c $< -o $@
+
+exec1: restore.cpp  $(OBJ_FILES1)
+	g++ $(CXXFLAGS) $^ -o restore
+ 
+powerful: powerful.cpp hehe.o
+	g++ $(CXXFLAGS) $^ -o $@
+
+.PHONY: restore
+
+restore:
+	rm -f restore powerful *.o
