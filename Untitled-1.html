@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+       <img src="1.jpg" alt="" width="300px">
+       <button id="left"> < </button>
+       <button id="right"> > </button>
+</body>
+<script>
+   let L=document.getElementById("left");
+   let R=document.getElementById("right");
+   let x=0;
+   L.addEventListener("click",function(){ x++;
+         let img=document.getElementsByTagName("img")[0];
+         let y = ((x % 4) + 4) % 4; // Ensures it remains in [0, 3]
+let z = y + 1;
+img.setAttribute("src", z + ".jpg");
+
+        //   img.src="2.jptg"
+    });
+R.addEventListener("click",function(){ x--;
+         let img=document.getElementsByTagName("img")[0];
+         let y = ((x % 4) + 4) % 4; // Ensures it remains in [0, 3]
+let z = y + 1;
+img.setAttribute("src", z + ".jpg");
+})
+
+</script>
+</html>
